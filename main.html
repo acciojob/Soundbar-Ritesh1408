@@ -1,16 +1,70 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Player</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: purple;
+            color: white;
+        }
+        #buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn, .stop {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: darkpurple;
+            color: white;
+        }
+        .stop {
+            background-color: #800080;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <h1>Sound Player</h1>
+    <div id="buttons"></div>
+    <script>
+        const sounds = ["sound1", "sound2", "sound3", "sound4", "sound5", "sound6"]; // Add your sound file names without extension
 
+        const buttonsContainer = document.getElementById("buttons");
+        let currentAudio = null;
+
+        sounds.forEach(sound => {
+            const btn = document.createElement("button");
+            btn.className = "btn";
+            btn.innerText = sound;
+            btn.addEventListener("click", () => {
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                currentAudio = new Audio(`sounds/${sound}.mp3`);
+                currentAudio.play();
+            });
+            buttonsContainer.appendChild(btn);
+        });
+
+        const stopBtn = document.createElement("button");
+        stopBtn.className = "stop";
+        stopBtn.innerText = "Stop";
+        stopBtn.addEventListener("click", () => {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+        });
+        buttonsContainer.appendChild(stopBtn);
+    </script>
 </body>
-
 </html>
